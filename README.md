@@ -25,30 +25,41 @@ public class Main extends Application {
         helpMenu.getItems().addAll(autoSave);
 
         //Edit Menu
-        Menu editMenu = new Menu("_Edit");
+        Menu editMenu = new Menu("_Editar");
         editMenu.getItems().add(new MenuItem("Cortar..."));
         editMenu.getItems().add(new MenuItem("Copiar..."));
 
-        //File Menu
-        Menu fileMenu = new Menu("_File");
-        MenuItem newFile = new MenuItem("Novo...");
-        newFile.setOnAction(e -> System.out.println("Criar novo arquivo!"));   // comando necessário pra que um item do menu tenha uma funcionalidade básica
-        fileMenu.getItems().add(newFile);
-        fileMenu.getItems().add(new MenuItem("Salvar..."));
-        fileMenu.getItems().add(new MenuItem("Configurações..."));
-        fileMenu.getItems().add(new SeparatorMenuItem());
-        fileMenu.getItems().add(new MenuItem("Save..."));
-        fileMenu.getItems().add(new SeparatorMenuItem());
-        fileMenu.getItems().add(new MenuItem("Sair..."));
+        //Menu de Arquivo
+        Menu arquivoMenu = new Menu("_Arquivo");
+        MenuItem novoArquivo = new MenuItem("Novo...");
+        novoArquivo.setOnAction(e -> System.out.println("Criar novo arquivo!"));   // comando necessário pra que um item do menu tenha uma funcionalidade básica
+        arquivoMenu.getItems().add(novoArquivo);
+        arquivoMenu.getItems().add(new MenuItem("Salvar..."));
+        arquivoMenu.getItems().add(new MenuItem("Configurações..."));
+        arquivoMenu.getItems().add(new SeparatorMenuItem());                    // essa linha cria separações entre itens do menu
+        arquivoMenu.getItems().add(new MenuItem("Save..."));
+        arquivoMenu.getItems().add(new SeparatorMenuItem());
+        arquivoMenu.getItems().add(new MenuItem("Sair..."));
 
         MenuItem paste = new MenuItem("Colar...");
         paste.setOnAction(event -> System.out.println("pasting some crap"));
-        paste.setDisable(true);                                                 //faz com que seja impossível interagir com o item do menu
+        paste.setDisable(true);                                                 // faz com que seja impossível interagir com o item do menu
         editMenu.getItems().add(paste);
+
+        //Menu Tamanho das letras
+        Menu tamaMenu = new Menu("Tamanho da Fonte");
+        ToggleGroup tamaToggle = new ToggleGroup();                            // Togglegroups vão ter opções que podem ser selecionadas,
+        RadioMenuItem pequena = new RadioMenuItem("Pequena");             // porém só uma poderá ser selecionada de cada vez.
+        RadioMenuItem media = new RadioMenuItem("Média");                 // Quando uma for selecionada, a outra será desmarcada.
+        RadioMenuItem grande = new RadioMenuItem("Grande");
+        pequena.setToggleGroup(tamaToggle);
+        media.setToggleGroup(tamaToggle);
+        grande.setToggleGroup(tamaToggle);
+        tamaMenu.getItems().addAll(pequena, media, grande);                     // elas (opções) devem ser adicionadas ao menu separadamente.
 
         //MenuBar
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+        menuBar.getMenus().addAll(arquivoMenu, editMenu, helpMenu,tamaMenu);
 
         VBox layout = new VBox(20);
         layout.getChildren().addAll();
