@@ -1,4 +1,4 @@
- IntegerProperty x= new SimpleIntegerProperty(2);
+ IntegerProperty x= new SimpleIntegerProperty(2);      
         IntegerProperty y= new SimpleIntegerProperty();
 
         y.bind(x.multiply(10));
